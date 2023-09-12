@@ -1,0 +1,62 @@
+<mat-toolbar color="primary" style="height: 100px;">
+  <button mat-icon-button (click)="sidenav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+<span>AutoElegance</span>
+<span class="example-spacer"></span>
+<button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+  <mat-icon>logout</mat-icon>
+</button>
+</mat-toolbar>
+
+<mat-sidenav-container>
+<mat-sidenav #sidenav opened="true" mode="side" style="width: 200px; background-color: rgb(3, 4, 25); width: 200px;">
+  <mat-nav-list>
+    <img src="./assets/carro.png" alt="Imagen de viajes" class="imagen-travel" style="width: 200px;">
+    
+    <mat-list-item routerLink="/pages/dashboard" class="sidenav" style="height: 70px">
+      <button mat-button>
+        <mat-icon class="color">home</mat-icon>
+        <span class="color">Inicio</span>
+      </button>
+    </mat-list-item>
+    <mat-list-item routerLink="/pages/clientes" class="sidenav" style="height: 70px">
+      <button mat-button>
+        <mat-icon class="color">person</mat-icon>
+        <span class="color">Clientes</span>
+      </button>
+    </mat-list-item>
+    <mat-list-item routerLink="/pages/vehiculos" class="sidenav" style="height: 70px">
+      <button mat-button>
+        <mat-icon class="color">directions_car</mat-icon>
+        <span class="color">Vehiculos</span>
+      </button>
+    </mat-list-item>
+    <mat-list-item routerLink="/pages/proveedores" class="sidenav" style="height: 70px">
+      <button mat-button>
+        <mat-icon class="color">store</mat-icon>
+        <span class="color">Proveedores</span>
+      </button>
+    </mat-list-item>
+    <mat-list-item routerLink="/pages/ventas" class="sidenav" style="height: 70px">
+      <button mat-button>
+        <mat-icon class="color">attach_money</mat-icon>
+        <span class="color">Ventas</span>
+      </button>
+    </mat-list-item>
+    <mat-list-item routerLink="/pages/compras" class="sidenav" style="height: 70px">
+      <button mat-button>
+        <mat-icon class="color">shopping_cart</mat-icon>
+        <span class="color">Compras</span>
+      </button>
+    </mat-list-item>
+  </mat-nav-list>  
+</mat-sidenav>
+
+<mat-sidenav-content>
+<!-- Add Content Here -->
+<div style="height: 90vh;">
+  <router-outlet></router-outlet>
+</div>
+</mat-sidenav-content>
+</mat-sidenav-container>
