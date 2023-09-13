@@ -1,9 +1,9 @@
 export class Vehiculos{
     id_vehiculo: number; 
-    Marca: string;
-    Modelo: string;
-    Año: string;
-    Stock: number;
-    Precio_uni: number;
+    marca: string;
+    modelo: string;
+    año: string;
+    stock: number;
+    precio_uni: number;
 }
 
