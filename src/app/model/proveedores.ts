@@ -1,7 +1,7 @@
 export class Proveedores{
     id_proveedor: number; 
-    Nombres: string;
-    Telefono: string; 
-    Email: string;
-    Empresa: string;
+    nombres: string;
+    telefono: string; 
+    email: string;
+    empresa: string;
 }
