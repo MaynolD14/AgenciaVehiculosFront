@@ -19,17 +19,18 @@ export class VehiculosComponent implements OnInit {
     stock: number;
     precio_uni: number;
 
- vehiculos: Vehiculos[];
- vehiculoModel: Vehiculos; //
- controllerVehiculo: boolean = false; 
+    vehiculos: Vehiculos[];
+    vehiculoModel: Vehiculos; //
+    controllerVehiculo: boolean = false; 
 
- displayedColumns: string[] = ['id_vehiculo', 'marca', 'modelo', 'año','stock', 'precio_uni', 'acciones'];
+ displayedColumns: string[] = ['id_vehiculo', 'marca', 'modelo', 'anio','stock', 'precio_uni', 'acciones'];
 
   constructor(
     private vehiculoService: VehiculosService,
     private dialog: MatDialog) { }
 
   ngOnInit(){
+    this.listarVehiculos(); 
   }
 
   agregarVehiculos() {
@@ -37,7 +38,7 @@ export class VehiculosComponent implements OnInit {
       id_vehiculo: 0,
       marca: this.marca,
       modelo: this.modelo,
-      año: this.anio,
+      anio: this.anio,
       stock: this.stock,
       precio_uni: this.precio_uni
     }; 
@@ -59,15 +60,16 @@ export class VehiculosComponent implements OnInit {
     this.vehiculoService
       .getVehiculos()
       .subscribe((vehiculo) => (this.vehiculos = vehiculo));
+      console.log(this.vehiculos);
   }
 
 ////////////////EDITAR CLIENTES //////////////////
 
-  editarClientes(vehiculo: Vehiculos) {
+  editarVehiculo(vehiculo: Vehiculos) {
     return this.vehiculoService.actualizarVehiculo(vehiculo.id_vehiculo, vehiculo)
   }
 
-  eliminarCliente(id: number) {
+  eliminarVehiculo(id: number) {
     console.log(id)
     this.vehiculoService.eliminarVehiculo(id).subscribe(
       response => {
@@ -96,7 +98,7 @@ export class VehiculosComponent implements OnInit {
        // Actualizar la tabla después de guardar los cambios
         this.listarVehiculos();
         // Se realizó la edición, realizar las acciones necesarias
-        this.editarClientes(result).subscribe(
+        this.editarVehiculo(result).subscribe(
           (response) => {
             console.log(response);
           },

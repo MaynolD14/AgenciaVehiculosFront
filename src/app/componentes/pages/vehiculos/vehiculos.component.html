@@ -1,7 +1,7 @@
 <div class="body">
   <mat-card class="clientesCard">
     <div class="header">
-      <h2 style="font-size: 30px; margin-bottom: 30px; margin-top: 10px; margin-left: 20px;">Clientes</h2>
+      <h2 style="font-size: 30px; margin-bottom: 30px; margin-top: 10px; margin-left: 20px;">Vehículos</h2>
     </div>
     <mat-card-content style="padding-bottom: 15px; margin-bottom: 10px;">
       <form (submit)="agregarVehiculos()">
@@ -19,17 +19,17 @@
 
         <mat-form-field class="full-width" appearance="outline" style="padding-right: 20px">
           <mat-label>Año</mat-label>
-          <input matInput type="text" placeholder="####-####" [(ngModel)]="anio" name ="año">
+          <input matInput type="text"[(ngModel)]="anio" name ="anio" required>
         </mat-form-field>
         
         <mat-form-field class="full-width" appearance="outline" style="padding-right: 20px;">
           <mat-label>Stock</mat-label>
-          <input matInput placeholder="Email" [(ngModel)]="stock" name="stock" required>
+          <input matInput [(ngModel)]="stock" name="stock" required>
         </mat-form-field>
 
         <mat-form-field class="full-width" appearance="outline" style="padding-right: 20px;">
           <mat-label>Precio</mat-label>
-          <input matInput placeholder="text" [(ngModel)]="precio_uni" name="precio_uni" required>
+          <input matInput [(ngModel)]="precio_uni" name="precio_uni" required>
         </mat-form-field>
 
         <button class="full-width" mat-raised-button color="primary" type="submit">
@@ -42,33 +42,37 @@
 
   <mat-card style="margin-top: 15px; border-radius: 40px; background-color:rgb(246, 245, 245);">
     <mat-table [dataSource]="vehiculos" style="background-color: rgb(42, 53, 100); border-radius: 20px; overflow: hidden;">
-      <ng-container matColumnDef="id_cliente">
+      <ng-container matColumnDef="id_vehiculo">
         <mat-header-cell *matHeaderCellDef class="color">ID</mat-header-cell>
-        <mat-cell *matCellDef="let clien" class="color">{{ clien.id_cliente }}</mat-cell>
+        <mat-cell *matCellDef="let vehi" class="color">{{ vehi.id_vehiculo }}</mat-cell>
       </ng-container>
-      <ng-container matColumnDef="nombres">
-        <mat-header-cell *matHeaderCellDef class="color">Nombres</mat-header-cell>
-        <mat-cell *matCellDef="let clien" class="color">{{ clien.Nombres }}</mat-cell>
+      <ng-container matColumnDef="marca">
+        <mat-header-cell *matHeaderCellDef class="color">Marca</mat-header-cell>
+        <mat-cell *matCellDef="let vehi" class="color">{{ vehi.Marca }}</mat-cell>
       </ng-container>
-      <ng-container matColumnDef="direccion">
-        <mat-header-cell *matHeaderCellDef class="color">Dirección</mat-header-cell>
-        <mat-cell *matCellDef="let clien" class="color">{{ clien.Direccion }}</mat-cell>
+      <ng-container matColumnDef="modelo">
+        <mat-header-cell *matHeaderCellDef class="color">Modelo</mat-header-cell>
+        <mat-cell *matCellDef="let vehi" class="color">{{ vehi.Modelo }}</mat-cell>
       </ng-container>
-      <ng-container matColumnDef="telefono">
-        <mat-header-cell *matHeaderCellDef class="color">Número de teléfono</mat-header-cell>
-        <mat-cell *matCellDef="let clien" class="color">{{ clien.Telefono }}</mat-cell>
+      <ng-container matColumnDef="anio">
+        <mat-header-cell *matHeaderCellDef class="color">Año</mat-header-cell>
+        <mat-cell *matCellDef="let vehi" class="color">{{ vehi.anio }}</mat-cell> <!-- Usa "anio" en minúsculas -->
+      </ng-container>      
+      <ng-container matColumnDef="stock">
+        <mat-header-cell *matHeaderCellDef class="color">Stock</mat-header-cell>
+        <mat-cell *matCellDef="let vehi" class="color">{{ vehi.stock }}</mat-cell>
       </ng-container>
-      <ng-container matColumnDef="email">
-        <mat-header-cell *matHeaderCellDef class="color">Correo electrónico</mat-header-cell>
-        <mat-cell *matCellDef="let clien" class="color">{{ clien.Email }}</mat-cell>
+      <ng-container matColumnDef="precio_uni">
+        <mat-header-cell *matHeaderCellDef class="color">precio</mat-header-cell>
+        <mat-cell *matCellDef="let vehi" class="color">{{ vehi.Precio_uni }}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="acciones">
         <mat-header-cell *matHeaderCellDef class="color">Acciones</mat-header-cell>
-        <mat-cell *matCellDef="let clien">
-          <button mat-icon-button color="warn" (click)="eliminarCliente(clien.id_cliente)">
+        <mat-cell *matCellDef="let vehi">
+          <button mat-icon-button color="warn" (click)="eliminarVehiculo(vehi.id_vehiculo)">
             <mat-icon>delete</mat-icon>
           </button>
-          <button mat-icon-button color="primary" (click)="editarCliente2(clien)">
+          <button mat-icon-button color="primary" (click)="editarCliente2(vehi)">
             <mat-icon>edit</mat-icon>
           </button>
         </mat-cell>
