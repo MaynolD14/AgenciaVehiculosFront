@@ -1,3 +1,76 @@
-<p>
-  clientes works!
-</p>
+<div class="body">
+  <mat-card class="clientesCard">
+    <div class="header">
+      <h2 style="font-size: 30px; margin-bottom: 30px; margin-top: 10px; margin-left: 20px;">Clientes</h2>
+    </div>
+    <mat-card-content style="padding-bottom: 15px; margin-bottom: 10px;">
+      <form (submit)="agregarCliente()">
+        <div>
+
+        <mat-form-field class="full-width" appearance="outline" style="padding-right: 20px; width: 350px">
+          <mat-label>Nombres</mat-label>
+          <input matInput type="text" [(ngModel)]="nombres" name = "nombres" required>
+        </mat-form-field>
+        
+        <mat-form-field class="full-width" appearance="outline" style="padding-right: 20px; width: 350px;">
+          <mat-label>Dirección</mat-label>
+          <input matInput type="text" [(ngModel)]="direccion" name="direccion" required>
+        </mat-form-field>      
+
+        <mat-form-field class="full-width" appearance="outline" style="padding-right: 20px">
+          <mat-label>Teléfono</mat-label>
+          <input matInput type="text" placeholder="####-####" [(ngModel)]="telefono" name ="telefono" required maxlength="9">
+        </mat-form-field>
+        
+        <mat-form-field class="full-width" appearance="outline" style="padding-right: 20px;">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Email" [(ngModel)]="email" name="email" required>
+        </mat-form-field>
+
+        <button class="full-width" mat-raised-button color="primary" type="submit">
+          Agregar Cliente
+        </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card style="margin-top: 15px; border-radius: 40px; background-color:rgb(246, 245, 245);">
+    <mat-table [dataSource]="clientes" style="background-color: rgb(42, 53, 100); border-radius: 20px; overflow: hidden;">
+      <ng-container matColumnDef="id_cliente">
+        <mat-header-cell *matHeaderCellDef class="color">ID</mat-header-cell>
+        <mat-cell *matCellDef="let clien" class="color">{{ clien.id_cliente }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="nombres">
+        <mat-header-cell *matHeaderCellDef class="color">Nombres</mat-header-cell>
+        <mat-cell *matCellDef="let clien" class="color">{{ clien.Nombres }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="direccion">
+        <mat-header-cell *matHeaderCellDef class="color">Dirección</mat-header-cell>
+        <mat-cell *matCellDef="let clien" class="color">{{ clien.Direccion }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="telefono">
+        <mat-header-cell *matHeaderCellDef class="color">Número de teléfono</mat-header-cell>
+        <mat-cell *matCellDef="let clien" class="color">{{ clien.Telefono }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef class="color">Correo electrónico</mat-header-cell>
+        <mat-cell *matCellDef="let clien" class="color">{{ clien.Email }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="acciones">
+        <mat-header-cell *matHeaderCellDef class="color">Acciones</mat-header-cell>
+        <mat-cell *matCellDef="let clien">
+          <button mat-icon-button color="warn" (click)="eliminarCliente(clien.id_cliente)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="editarCliente2(clien)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+  </mat-card>
+</div>
