@@ -56,14 +56,14 @@
       </ng-container>
       <ng-container matColumnDef="anio">
         <mat-header-cell *matHeaderCellDef class="color">Año</mat-header-cell>
-        <mat-cell *matCellDef="let vehi" class="color">{{ vehi.anio }}</mat-cell> <!-- Usa "anio" en minúsculas -->
+        <mat-cell *matCellDef="let vehi" class="color">{{ vehi.anio }}</mat-cell>
       </ng-container>      
       <ng-container matColumnDef="stock">
         <mat-header-cell *matHeaderCellDef class="color">Stock</mat-header-cell>
         <mat-cell *matCellDef="let vehi" class="color">{{ vehi.stock }}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="precio_uni">
-        <mat-header-cell *matHeaderCellDef class="color">precio</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef class="color">Precio</mat-header-cell>
         <mat-cell *matCellDef="let vehi" class="color">{{ vehi.Precio_uni }}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="acciones">
@@ -81,5 +81,6 @@
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
     </mat-table>
-  </mat-card>
+</mat-card>
+
 </div>

@@ -23,7 +23,7 @@ export class VehiculosComponent implements OnInit {
     vehiculoModel: Vehiculos; //
     controllerVehiculo: boolean = false; 
 
- displayedColumns: string[] = ['id_vehiculo', 'marca', 'modelo', 'anio','stock', 'precio_uni', 'acciones'];
+ displayedColumns: string[] = ['id_vehiculo', 'marca', 'modelo', 'anio', 'stock', 'precio_uni', 'acciones'];
 
   constructor(
     private vehiculoService: VehiculosService,
@@ -60,7 +60,7 @@ export class VehiculosComponent implements OnInit {
     this.vehiculoService
       .getVehiculos()
       .subscribe((vehiculo) => (this.vehiculos = vehiculo));
-      console.log(this.vehiculos);
+      
   }
 
 ////////////////EDITAR CLIENTES //////////////////
