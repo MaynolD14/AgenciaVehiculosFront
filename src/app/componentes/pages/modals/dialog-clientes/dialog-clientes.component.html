@@ -1,22 +1,26 @@
 <div mat-dialog-content style="height: 300px;">
   <h2 mat-dialog-title>Editar Clientes</h2>
   <form style="margin-top: 50px;">
-    <mat-form-field appearance="outline" style="margin-bottom: 10px;">
+    <mat-form-field appearance="outline" style="margin-bottom: 5px;">
       <mat-label>Nombres</mat-label>
-      <input matInput [(ngModel)]="cliente.nombres" name="nombres" required>
+      <input matInput [(ngModel)]="clienteData.nombres" name="nombres" required>
     </mat-form-field>
-    <mat-form-field appearance="outline" style="margin-bottom: 10px; margin-left: 20px;">
+    <mat-form-field appearance="outline" style="margin-bottom: 5px; margin-left: 20px;">
       <mat-label>Direccion</mat-label>
-      <input matInput [(ngModel)]="cliente.direccion" name="direccion" required>
+      <input matInput [(ngModel)]="clienteData.direccion" name="direccion" required>
     </mat-form-field>
-    <mat-form-field appearance="outline" style="margin-bottom: 10px;  margin-left: 20px;">
+    <mat-form-field appearance="outline" style="margin-bottom: 5px;  margin-left: 20px;">
       <mat-label>Teléfono</mat-label>
-      <input matInput type="text" [(ngModel)]="cliente.telefono" name="telefono" required maxlength="9">
+      <input matInput type="text" [(ngModel)]="clienteData.telefono" name="telefono" required maxlength="9">
     </mat-form-field>
-    <mat-form-field appearance="outline" style="margin-bottom: 10px;  margin-left: 20px;">
+    <mat-form-field appearance="outline" style="margin-bottom: 5px;  margin-left: 20px;">
       <mat-label>Correo</mat-label>
-      <input matInput type="text" [(ngModel)]="cliente.email" name="email" required>
+      <input matInput type="text" [(ngModel)]="clienteData.email" name="email" required>
     </mat-form-field>
+    <!-- Mensaje para indicar que los datos no han cambiado -->
+    <div *ngIf="showMessage" style="color: rgba(255, 0, 0, 0.773); text-align: center; font-weight: bold;">
+      Los datos no han cambiado.
+    </div>
     <div mat-dialog-actions>
       <button mat-raised-button color="primary" (click)="guardarEdicion()">Guardar cambios</button>
       <button mat-raised-button color="primary" (click)="cancelarEdicion()">Cancelar</button>
