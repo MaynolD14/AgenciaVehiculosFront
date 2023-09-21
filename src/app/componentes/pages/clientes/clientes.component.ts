@@ -96,15 +96,6 @@ export class ClientesComponent implements OnInit {
       if (result) {
        // Actualizar la tabla después de guardar los cambios
         this.listarClientes();
-        // Se realizó la edición, realizar las acciones necesarias
-        this.editarClientes(result).subscribe(
-          (response) => {
-            console.log(response);
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
       }
     });
   }
