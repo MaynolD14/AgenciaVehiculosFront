@@ -16,6 +16,7 @@ import { ComprasComponent } from './compras/compras.component';
 import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {MatChipsModule} from '@angular/material/chips';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -37,7 +38,8 @@ import {MatChipsModule} from '@angular/material/chips';
         CommonModule,
         ReusableModule,
         PagesRoutingModule,
-        MatChipsModule
+        MatChipsModule,
+        FormsModule,
     ],
     providers:[]
 })
