@@ -9,19 +9,19 @@ import { Clientes } from 'src/app/model/clientes';
 })
 export class DialogClientesComponent implements OnInit {
     cliente: Clientes
-  constructor(
-    public dialogRef: MatDialogRef<DialogClientesComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private clientes: ClientesService
-  ) {
-      this.cliente = {...data.cliente}
-   }
+    constructor(
+      public dialogRef: MatDialogRef<DialogClientesComponent>,
+      @Inject(MAT_DIALOG_DATA) public data: any,
+      private clientesService: ClientesService
+    ) {
+      this.cliente = { ...data.cliente };
+    }
 
   ngOnInit() {
   }
 
   guardarEdicion(): void {
-    this.clientes.actualizarCliente(this.cliente.id_cliente, this.cliente).subscribe(
+    this.clientesService.actualizarCliente(this.cliente.id_cliente, this.cliente).subscribe(
       (response) => {
         console.log(response);
         this.dialogRef.close(true);

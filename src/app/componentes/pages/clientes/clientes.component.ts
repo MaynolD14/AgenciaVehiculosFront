@@ -86,26 +86,16 @@ export class ClientesComponent implements OnInit {
     );
   }
   
-  editarCliente2(cliente: ClientesService) {
-    console.log(cliente)
+  editarCliente2(cliente: Clientes) {
     const dialogRef = this.dialog.open(DialogClientesComponent, {
       data: { cliente: cliente }
     });
-
+  
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-       // Actualizar la tabla después de guardar los cambios
+        // Actualizar la tabla después de guardar los cambios
         this.listarClientes();
-        // Se realizó la edición, realizar las acciones necesarias
-        this.editarClientes(result).subscribe(
-          (response) => {
-            console.log(response);
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
       }
     });
-  }
+  }  
 }
