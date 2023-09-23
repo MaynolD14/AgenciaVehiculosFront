@@ -17,6 +17,7 @@ import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {MatChipsModule} from '@angular/material/chips';
 import { FormsModule } from '@angular/forms';
+import { DialogDeleteClientesComponent } from './modals/dialog-delete-clientes/dialog-delete-clientes.component';
 
 @NgModule({
     declarations: [
@@ -32,7 +33,8 @@ import { FormsModule } from '@angular/forms';
         DialogComprasComponent,
         DialogProveedoresComponent,
         DialogVehiculosComponent,
-        DialogVentasComponent
+        DialogVentasComponent,
+        DialogDeleteClientesComponent
     ],
     imports:[
         CommonModule,

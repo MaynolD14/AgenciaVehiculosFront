@@ -5,6 +5,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { DialogClientesComponent } from '../modals/dialog-clientes/dialog-clientes.component';
+import { DialogDeleteClientesComponent } from '../modals/dialog-delete-clientes/dialog-delete-clientes.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-clientes',
@@ -26,9 +28,12 @@ export class ClientesComponent implements OnInit {
 
  displayedColumns: string[] = ['id_cliente', 'nombres', 'direccion', 'telefono','email', 'acciones'];
 
+
   constructor(
     private clientesService: ClientesService,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private _snackBar: MatSnackBar,
+    ) { }
 
   ngOnInit(){
     this.listarClientes(); 
@@ -46,11 +51,11 @@ export class ClientesComponent implements OnInit {
       (response) => {
         console.log(response);
         this.listarClientes(); 
-        // Aquí se puede manejar la respuesta de la creación del usuario
+        // Aquí se puede manejar la respuesta de la creación del cliente
       },
       (error) => {
         console.log(error);
-        // Aquí se puede manejar el error de la creación del usuario
+        // Aquí se puede manejar el error de la creación del cliente
       }
     );
   }
@@ -67,24 +72,6 @@ export class ClientesComponent implements OnInit {
   editarClientes(cliente: Clientes) {
     return this.clientesService.actualizarCliente(cliente.id_cliente, cliente)
   }
-
-  eliminarCliente(id: number) {
-    console.log(id)
-    this.clientesService.eliminarCliente(id).subscribe(
-      response => {
-        console.log(response);
-        // Aquí se puede manejar la respuesta de la eliminación del usuario
-        
-        // Llamada a getUsuarios() dentro del bloque subscribe()
-        this.listarClientes(); 
-      },
-      error => {
-        console.log(error);
-        
-        // Aquí se puede manejar el error de la eliminación del usuario
-      }
-    );
-  }
   
   editarCliente2(cliente: Clientes) {
     const dialogRef = this.dialog.open(DialogClientesComponent, {
@@ -98,4 +85,51 @@ export class ClientesComponent implements OnInit {
       }
     });
   }  
+
+
+////////////////ELIMINAR CLIENTES //////////////////
+
+  
+eliminarClientes(clientes: Clientes) {
+  console.log(clientes);
+
+  const dialogRef = this.dialog.open(DialogDeleteClientesComponent, {
+    disableClose: true,
+    data: { cliente: clientes }
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result === true) {
+      console.log("Usuario confirmó eliminar");
+      
+      // Lógica de eliminación aquí
+      this.clientesService.eliminarCliente(clientes.id_cliente).subscribe({
+        next: (data) => {
+          if (data.status) {
+            this.mostrarAlerta("No se pudo eliminar el Cliente", "Error");
+          } else {
+            this.mostrarAlerta("El Cliente fue eliminado", "Listo!")
+            this.listarClientes();
+          }
+        },
+        error: (e) => {
+          console.log("Fallo al eliminar el cliente:", e);
+        },
+        complete: () => {
+        }
+      });
+      
+    } else {
+      console.log("Usuario canceló la eliminación");
+    }
+  });
+}
+
+mostrarAlerta(mensaje:string,tipo:string) {
+  this._snackBar.open(mensaje, tipo, {
+    horizontalPosition: "end",
+    verticalPosition: "top",
+    duration:3000
+  });
+}
 }

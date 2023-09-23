@@ -30,7 +30,7 @@ export class ClientesService {
     return this.http.put<any>(urlById, clientes);
   } 
 
-  eliminarCliente(id: number): Observable<any> {
+  eliminarCliente(id: any): Observable<any> {
     const urlById = `${this.url}/${id}`;
     return this.http.delete<any>(urlById);
   }
