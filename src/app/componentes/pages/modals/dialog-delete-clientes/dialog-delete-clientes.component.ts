@@ -18,7 +18,7 @@ export class DialogDeleteClientesComponent implements OnInit {
     private clientes: ClientesService
   ) {
     this.cliente = { ...data.cliente };
-    this.clienteNombre = data.cliente.Nombres; // Accede al nombre usando la propiedad Nombres
+    this.clienteNombre = data.cliente.nombres; // Accede al nombre usando la propiedad Nombres
   }
 
   ngOnInit() {}

@@ -42,24 +42,24 @@
       </ng-container>
       <ng-container matColumnDef="nombres">
         <mat-header-cell *matHeaderCellDef class="color">Nombres</mat-header-cell>
-        <mat-cell *matCellDef="let proveedor" class="color">{{ proveedor.Nombres }}</mat-cell>
+        <mat-cell *matCellDef="let proveedor" class="color">{{ proveedor.nombres }}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="telefono">
         <mat-header-cell *matHeaderCellDef class="color">Número de teléfono</mat-header-cell>
-        <mat-cell *matCellDef="let proveedor" class="color">{{ proveedor.Telefono }}</mat-cell>
+        <mat-cell *matCellDef="let proveedor" class="color">{{ proveedor.telefono }}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="email">
         <mat-header-cell *matHeaderCellDef class="color">Correo electrónico</mat-header-cell>
-        <mat-cell *matCellDef="let proveedor" class="color">{{ proveedor.Email }}</mat-cell>
+        <mat-cell *matCellDef="let proveedor" class="color">{{ proveedor.email }}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="empresa">
         <mat-header-cell *matHeaderCellDef class="color">Empresa</mat-header-cell>
-        <mat-cell *matCellDef="let proveedor" class="color">{{ proveedor.Empresa }}</mat-cell>
+        <mat-cell *matCellDef="let proveedor" class="color">{{ proveedor.empresa }}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="acciones">
         <mat-header-cell *matHeaderCellDef class="color">Acciones</mat-header-cell>
         <mat-cell *matCellDef="let proveedor">
-          <button mat-icon-button color="warn" (click)="eliminarProveedor(proveedor.id_proveedor)">
+          <button mat-icon-button color="warn" (click)="eliminarProveedores(proveedor)">
             <mat-icon>delete</mat-icon>
           </button>
           <button mat-icon-button color="primary" (click)="editarProveedor2(proveedor)">

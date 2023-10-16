@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Clientes } from '../model/clientes';
 import { Observable } from 'rxjs';
 import { Vehiculos } from '../model/vehiculos';
 
@@ -11,6 +10,7 @@ import { Vehiculos } from '../model/vehiculos';
 export class VehiculosService {
 
   private url = `${environment.HOST}/vehiculos`;
+
   constructor(private http: HttpClient) { }
 
   getVehiculos(): Observable<Vehiculos[]> {
@@ -22,17 +22,25 @@ export class VehiculosService {
     return this.http.get<any>(urlById);
   }
 
-  crearVehiculo(vehiculos: any): Observable<any> {
-    return this.http.post<any>(this.url, vehiculos);
+  crearVehiculo(vehiculo: any): Observable<any> {
+    return this.http.post<any>(this.url, vehiculo);
   }
 
-  actualizarVehiculo(id: number, vehiculos: any): Observable<any> {
+  actualizarVehiculo(id: number, vehiculo: any): Observable<any> {
     const urlById = `${this.url}/${id}`;
-    return this.http.put<any>(urlById, vehiculos);
+    return this.http.put<any>(urlById, vehiculo);
   } 
 
   eliminarVehiculo(id: number): Observable<any> {
     const urlById = `${this.url}/${id}`;
     return this.http.delete<any>(urlById);
   }
+
+  actualizarStockVehiculo(id_vehiculo: number, cantidadComprada: number): Observable<any> {
+    const urlToUpdateStock = `${this.url}/actualizarStock/${id_vehiculo}`;
+    const params = new HttpParams().set('cantidad_comprada', cantidadComprada.toString());
+  
+    return this.http.put<any>(urlToUpdateStock, null, { params });
+  }
+  
 }

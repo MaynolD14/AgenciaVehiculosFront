@@ -3,6 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { Vehiculos } from 'src/app/model/vehiculos';
 import { VehiculosService } from 'src/app/services/vehiculos.service';
 import { DialogVehiculosComponent } from '../modals/dialog-vehiculos/dialog-vehiculos.component';
+import { DialogDeleteVehiculosComponent } from '../modals/dialog-delete-vehiculos/dialog-delete-vehiculos.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-vehiculos',
@@ -27,7 +29,8 @@ export class VehiculosComponent implements OnInit {
 
   constructor(
     private vehiculoService: VehiculosService,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private _snackBar: MatSnackBar) { }
 
   ngOnInit(){
     this.listarVehiculos(); 
@@ -109,4 +112,51 @@ export class VehiculosComponent implements OnInit {
       }
     });
   }
+
+////////////////ELIMINAR VEHÍCULOS //////////////////
+
+  
+eliminarVehiculos(vehiculo: Vehiculos) {
+  console.log(vehiculo);
+
+  const dialogRef = this.dialog.open(DialogDeleteVehiculosComponent, {
+    disableClose: true,
+    data: { vehiculo: vehiculo }
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result === true) {
+      console.log("Usuario confirmó eliminar");
+      
+      // Lógica de eliminación aquí
+      this.vehiculoService.eliminarVehiculo(vehiculo.id_vehiculo).subscribe({
+        next: (data) => {
+          if (data.status) {
+            this.mostrarAlerta("No se pudo eliminar el vehiculo", "Error");
+          } else {
+            this.mostrarAlerta("El vehiculo fue eliminado", "Listo!")
+            this.listarVehiculos();
+          }
+        },
+        error: (e) => {
+          console.log("Fallo al eliminar el vehiculo:", e);
+        },
+        complete: () => {
+        }
+      });
+      
+    } else {
+      console.log("Usuario canceló la eliminación");
+    }
+  });
+}
+
+mostrarAlerta(mensaje:string,tipo:string) {
+  this._snackBar.open(mensaje, tipo, {
+    horizontalPosition: "end",
+    verticalPosition: "top",
+    duration:3000
+  });
+}
+
 }

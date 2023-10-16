@@ -32,10 +32,10 @@ export class DialogClientesComponent implements OnInit {
     this.showMessage = false; // Ocultar el mensaje al cargar los datos
     this.clientes.getClienteID(this.clienteId).subscribe(
       (cliente: any) => {
-        this.clienteData.nombres = cliente.Nombres;
-        this.clienteData.email = cliente.Email;
-        this.clienteData.direccion = cliente.Direccion;
-        this.clienteData.telefono = cliente.Telefono;
+        this.clienteData.nombres = cliente.nombres;
+        this.clienteData.email = cliente.email;
+        this.clienteData.direccion = cliente.direccion;
+        this.clienteData.telefono = cliente.telefono;
         this.isLoading = false; // Ocultar indicador de carga cuando se completa
       },
       (error) => {

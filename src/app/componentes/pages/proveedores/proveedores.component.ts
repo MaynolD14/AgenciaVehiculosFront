@@ -3,6 +3,8 @@ import { ProveedoresService } from 'src/app/services/proveedores.service';
 import { Proveedores } from 'src/app/model/proveedores';
 import { DialogProveedoresComponent } from '../modals/dialog-proveedores/dialog-proveedores.component';
 import { MatDialog } from '@angular/material/dialog';
+import { DialogDeleteProveedoresComponent } from '../modals/dialog-delete-proveedores/dialog-delete-proveedores.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-proveedores',
@@ -25,7 +27,8 @@ export class ProveedoresComponent implements OnInit {
 
   constructor(
     private proveedoresService: ProveedoresService, // Servicio para interactuar con proveedores
-    private dialog: MatDialog, // Servicio para mostrar diálogos
+    private dialog: MatDialog,
+    private _snackBar: MatSnackBar, // Servicio para mostrar diálogos
   ) { }
 
   ngOnInit() {
@@ -66,21 +69,7 @@ export class ProveedoresComponent implements OnInit {
     return this.proveedoresService.actualizarProveedor(proveedor.id_proveedor, proveedor);
   }
   
-  eliminarProveedor(id: number) {
-    console.log(id);
-    this.proveedoresService.eliminarProveedor(id).subscribe(
-      (response) => {
-        console.log(response);
-        // Aquí se puede manejar la respuesta de la eliminación del proveedor
-        this.listarProveedores();
-      },
-      (error) => {
-        console.log(error);
-        // Aquí se puede manejar el error de la eliminación del proveedor
-      }
-    );
-  }
-  
+
   editarProveedor2(proveedor: Proveedores) {
     const dialogRef = this.dialog.open(DialogProveedoresComponent, {
       data: { proveedor: proveedor }
@@ -102,4 +91,46 @@ export class ProveedoresComponent implements OnInit {
       }
     });
   }
+
+////////////////ELIMINAR PROVEEDORES //////////////////
+
+  
+eliminarProveedores(proveedor: Proveedores) {
+  console.log(proveedor);
+
+  const dialogRef = this.dialog.open(DialogDeleteProveedoresComponent, {
+    disableClose: true,
+    data: { proveedor: proveedor }
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result === true) {
+      console.log("Usuario confirmó eliminar");
+      console.log(proveedor.id_proveedor);
+      // Lógica de eliminación aquí
+      this.proveedoresService.eliminarProveedor(proveedor.id_proveedor).subscribe(
+        () => {
+          this.mostrarAlerta("El proveedor fue eliminado", "Listo!");
+          this.listarProveedores();
+        },
+        (error) => {
+          console.log("Fallo al eliminar el proveedor:", error);
+          this.mostrarAlerta("No se pudo eliminar el proveedor", "Error");
+        }
+      );
+    } else {
+      console.log("Usuario canceló la eliminación");
+    }
+  });
+}
+
+
+mostrarAlerta(mensaje:string,tipo:string) {
+  this._snackBar.open(mensaje, tipo, {
+    horizontalPosition: "end",
+    verticalPosition: "top",
+    duration:3000
+  });
+}
+
 }  

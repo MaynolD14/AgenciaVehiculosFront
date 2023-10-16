@@ -3,6 +3,6 @@ export class Ventas{
     id_vehiculo: number;
     id_cliente: number;
     cantidad: number;
-    Fecha_venta: string;
+    fecha_venta: string;
     total: number;
 }

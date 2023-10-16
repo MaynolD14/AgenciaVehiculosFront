@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { NavegacionComponent } from './navegacion/navegacion.component';
 import { PagesComponent } from './pages.component';
 import { ReusableModule } from '../reutilizable/reutilizable.component';
@@ -18,6 +18,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import {MatChipsModule} from '@angular/material/chips';
 import { FormsModule } from '@angular/forms';
 import { DialogDeleteClientesComponent } from './modals/dialog-delete-clientes/dialog-delete-clientes.component';
+import { DialogDeleteProveedoresComponent } from './modals/dialog-delete-proveedores/dialog-delete-proveedores.component';
+import { DialogDeleteVehiculosComponent } from './modals/dialog-delete-vehiculos/dialog-delete-vehiculos.component';
+import { DialogDeleteComprasComponent } from './modals/dialog-delete-compras/dialog-delete-compras.component';
 
 @NgModule({
     declarations: [
@@ -34,7 +37,10 @@ import { DialogDeleteClientesComponent } from './modals/dialog-delete-clientes/d
         DialogProveedoresComponent,
         DialogVehiculosComponent,
         DialogVentasComponent,
-        DialogDeleteClientesComponent
+        DialogDeleteClientesComponent,
+        DialogDeleteProveedoresComponent,
+        DialogDeleteVehiculosComponent,
+        DialogDeleteComprasComponent
     ],
     imports:[
         CommonModule,
@@ -43,6 +49,6 @@ import { DialogDeleteClientesComponent } from './modals/dialog-delete-clientes/d
         MatChipsModule,
         FormsModule,
     ],
-    providers:[]
+    providers:[DatePipe]
 })
 export class PagesModule{}

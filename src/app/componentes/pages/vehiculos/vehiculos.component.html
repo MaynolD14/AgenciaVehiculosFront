@@ -33,7 +33,7 @@
         </mat-form-field>
 
         <button class="full-width" mat-raised-button color="primary" type="submit">
-          Agregar Cliente
+          Agregar vehículo
         </button>
         </div>
       </form>
@@ -48,11 +48,11 @@
       </ng-container>
       <ng-container matColumnDef="marca">
         <mat-header-cell *matHeaderCellDef class="color">Marca</mat-header-cell>
-        <mat-cell *matCellDef="let vehi" class="color">{{ vehi.Marca }}</mat-cell>
+        <mat-cell *matCellDef="let vehi" class="color">{{ vehi.marca }}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="modelo">
         <mat-header-cell *matHeaderCellDef class="color">Modelo</mat-header-cell>
-        <mat-cell *matCellDef="let vehi" class="color">{{ vehi.Modelo }}</mat-cell>
+        <mat-cell *matCellDef="let vehi" class="color">{{ vehi.modelo }}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="anio">
         <mat-header-cell *matHeaderCellDef class="color">Año</mat-header-cell>
@@ -64,12 +64,12 @@
       </ng-container>
       <ng-container matColumnDef="precio_uni">
         <mat-header-cell *matHeaderCellDef class="color">Precio</mat-header-cell>
-        <mat-cell *matCellDef="let vehi" class="color">{{ vehi.Precio_uni }}</mat-cell>
+        <mat-cell *matCellDef="let vehi" class="color">{{ vehi.precio_uni }}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="acciones">
         <mat-header-cell *matHeaderCellDef class="color">Acciones</mat-header-cell>
         <mat-cell *matCellDef="let vehi">
-          <button mat-icon-button color="warn" (click)="eliminarVehiculo(vehi.id_vehiculo)">
+          <button mat-icon-button color="warn" (click)="eliminarVehiculos(vehi)">
             <mat-icon>delete</mat-icon>
           </button>
           <button mat-icon-button color="primary" (click)="editarCliente2(vehi)">

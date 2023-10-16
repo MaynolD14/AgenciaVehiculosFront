@@ -1,3 +1,93 @@
-<p>
-  compras works!
-</p>
+<div class="body">
+  <mat-card class="compraCard">
+    <div class="header">
+      <h2 style="font-size: 30px; margin-bottom: 30px; margin-top: 10px; text-align: center;">Nueva compra</h2>
+    </div>
+    <form (submit)="crearCompras()" style="margin-bottom: 15px; ">
+    <mat-form-field class="full-width" appearance="outline" style="margin-right: 20px; border-top-left-radius: 1%; margin-left: 20px; ">
+      <mat-label>Cantidad</mat-label>
+      <input matInput  type="number" placeholder="Cantidad" [(ngModel)]="cantidad" name = "Cantidad" required>
+    </mat-form-field>
+    
+    <mat-form-field class="full-width" appearance="outline"  style="margin-right: 20px; border-radius: 5px;">
+      <mat-label>Descripción</mat-label>
+      <input matInput placeholder="Descripción" [(ngModel)]="descripcion" name = "descripcion" required>
+    </mat-form-field>
+    
+    <mat-form-field class="full-width" appearance="outline" style="margin-right: 20px; border-radius: 5px;">
+      <mat-label>Fecha de compra</mat-label>
+      <input matInput style="text-decoration: white" type="date" placeholder="Fecha" [(ngModel)]="fechaCompra" name="fechaCompra" required>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" appearance="outline" style="margin-right: 20px; border-radius: 5px;">
+      <mat-label>Precio</mat-label>
+      <input matInput type="number" placeholder="Precio" [(ngModel)]="precioCompra" name = "precio" required>
+    </mat-form-field>
+    
+    <mat-form-field class="full-width" appearance="outline" style="margin-right: 20px; border-radius: 5px">
+      <mat-label>Seleccione un proveedor</mat-label>
+      <mat-select [(ngModel)]="proveedorSeleccionado" (selectionChange)="onChangeProveedor()" name="proveedorSeleccionado">
+        <mat-option *ngFor="let prove of proveedores" [value]="prove.id_proveedor">{{ prove.nombres }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    <mat-form-field class="full-width" appearance="outline" style="margin-right: 20px;  border-radius: 5px;">
+      <mat-label>Seleccione un vehículo</mat-label>
+      <mat-select [(ngModel)]="vehiculoSeleccionado" (selectionChange)="onChangeVehiculo()" name="id_vehiculo">
+        <mat-option *ngFor="let vehi of vehiculos" [value]="vehi.id_vehiculo">{{ vehi.marca }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+      <button class="full-width" mat-raised-button color="primary" type="submit" style="margin-left: 20px;">
+        Agregar compra
+      </button>
+    </form>
+  </mat-card>
+  
+  <mat-card  style="margin-top: 15px; border-radius: 40px; background-color:rgb(245, 245, 245);">
+    <mat-table *ngIf="controllerCompra" [dataSource]="compras" style="background-color: rgb(42, 53, 100); border-radius: 20px; overflow: hidden;">
+      <ng-container matColumnDef="id_compra">
+        <mat-header-cell *matHeaderCellDef class="color" style="font-size: 15px;">ID</mat-header-cell>
+        <mat-cell *matCellDef="let compra" class="color">{{ compra.id_compra }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="cantidad">
+        <mat-header-cell *matHeaderCellDef class="color"  style="font-weight: bold; font-size: 15px;">Cantidad</mat-header-cell>
+        <mat-cell *matCellDef="let compra" class="color">{{ compra.cantidad }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="descripcion">
+        <mat-header-cell *matHeaderCellDef class="color"  style="font-weight: bold; font-size: 15px;">Descripción</mat-header-cell>
+        <mat-cell *matCellDef="let compra" class="color">{{ compra.descripcion }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="fechaCompra">
+        <mat-header-cell *matHeaderCellDef class="centered-header-cell" class="color"  style="font-weight: bold; font-size: 15px;">Fecha</mat-header-cell>
+        <mat-cell *matCellDef="let compra" class="color" >{{ compra.fechaCompra }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="precioCompra">
+        <mat-header-cell *matHeaderCellDef class="color"  style="font-weight: bold; font-size: 15px;">Precio</mat-header-cell>
+        <mat-cell *matCellDef="let compra" class="color">{{ compra.precioCompra }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="id_proveedor">
+        <mat-header-cell *matHeaderCellDef class="color"  style="font-weight: bold; font-size: 15px;">Proveedor</mat-header-cell>
+        <mat-cell *matCellDef="let compra" class="color">{{ compra.id_proveedor }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="id_vehiculo">
+        <mat-header-cell *matHeaderCellDef class="color"  style="font-weight: bold; font-size: 15px;">Vehiculo</mat-header-cell>
+        <mat-cell *matCellDef="let compra" class="color" >{{ compra.id_vehiculo}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="acciones">
+        <mat-header-cell *matHeaderCellDef class="color"  style="font-weight: bold; font-size: 15px;">Acciones</mat-header-cell>
+        <mat-cell *matCellDef="let compra">
+          <button mat-icon-button color="warn" (click)="eliminarCompra(compra)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="editarCompra(compra)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+  </mat-card>
+</div>
