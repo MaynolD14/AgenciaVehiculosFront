@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Vehiculos } from 'src/app/model/vehiculos';
 import { VehiculosService } from 'src/app/services/vehiculos.service';
 import { DialogVehiculosComponent } from '../modals/dialog-vehiculos/dialog-vehiculos.component';
 import { DialogDeleteVehiculosComponent } from '../modals/dialog-delete-vehiculos/dialog-delete-vehiculos.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-vehiculos',
@@ -21,6 +22,7 @@ export class VehiculosComponent implements OnInit {
     stock: number;
     precio_uni: number;
 
+    filtro: string = ''; // Propiedad para almacenar el valor del filtro
     vehiculos: Vehiculos[];
     vehiculoModel: Vehiculos; //
     controllerVehiculo: boolean = false; 
@@ -32,9 +34,17 @@ export class VehiculosComponent implements OnInit {
     private dialog: MatDialog,
     private _snackBar: MatSnackBar) { }
 
+    @ViewChild(MatTable) table: MatTable<Vehiculos>;
+    dataSource: MatTableDataSource<Vehiculos>;
+
   ngOnInit(){
     this.listarVehiculos(); 
+    this.dataSource = new MatTableDataSource(this.vehiculos);
   }
+  aplicarFiltro() {
+    this.dataSource.filter = this.filtro.trim().toLowerCase();
+  }
+  
 
   agregarVehiculos() {
     const nuevoVehiculo: Vehiculos = {
@@ -62,9 +72,12 @@ export class VehiculosComponent implements OnInit {
     this.controllerVehiculo = true;
     this.vehiculoService
       .getVehiculos()
-      .subscribe((vehiculo) => (this.vehiculos = vehiculo));
-      
+      .subscribe((vehiculo) => {
+        this.vehiculos = vehiculo;
+        this.dataSource.data = vehiculo; // Actualizar la fuente de datos con los nuevos datos
+      });
   }
+  
 
 ////////////////EDITAR CLIENTES //////////////////
 

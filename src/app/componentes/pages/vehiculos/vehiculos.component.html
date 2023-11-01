@@ -37,11 +37,17 @@
         </button>
         </div>
       </form>
+      <br>
+      <mat-form-field class="full-width" appearance="outline" style="width: 350px; margin-left: 10px;">
+        <mat-label>Filtrar vehículos</mat-label>
+        <input matInput [(ngModel)]="filtro" (keyup)="aplicarFiltro()" placeholder="Escriba para filtrar">
+      </mat-form-field>
+      
     </mat-card-content>
   </mat-card>
 
   <mat-card style="margin-top: 15px; border-radius: 40px; background-color:rgb(246, 245, 245);">
-    <mat-table [dataSource]="vehiculos" style="background-color: rgb(42, 53, 100); border-radius: 20px; overflow: hidden;">
+    <mat-table [dataSource]="dataSource" style="background-color: rgb(42, 53, 100); border-radius: 20px; overflow: hidden;">
       <ng-container matColumnDef="id_vehiculo">
         <mat-header-cell *matHeaderCellDef class="color">ID</mat-header-cell>
         <mat-cell *matCellDef="let vehi" class="color">{{ vehi.id_vehiculo }}</mat-cell>
